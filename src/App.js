@@ -1,8 +1,10 @@
-import React from 'react';
-import EventPracticeFn from './EventPracticeFn';
+import React, { Component } from 'react';
+import Validation from './ValidationSample';
 
-function App() {
-  return <EventPracticeFn />;
+class App extends Component {
+  render() {
+    return <Validation />;
+  }
 }
 
 export default App;
