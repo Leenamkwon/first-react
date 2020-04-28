@@ -7,38 +7,48 @@ const IterationSample = () => {
     { id: 3, text: '눈' },
     { id: 4, text: '바람' },
   ]);
+
   const [inputText, setInputText] = useState('');
   const [nextId, setNextId] = useState(5);
 
+  const namesList = names.map((name) => (
+    <li onDoubleClick={() => onRemove(names.id)} key={name.id}>
+      {name.text}
+    </li>
+  ));
+
+  // input Value
   const onChange = (e) => setInputText(e.target.value);
 
+  // Click event
   const onClick = () => {
     const nextNames = names.concat({
       id: nextId,
       text: inputText,
     });
-    setNextId(nextId + 1); // nextId 값에 1을 더해 준다.
-    setNames(nextNames); // names 값을 업데이트한다.
-    setInputText(''); // inputText를 비운다.
-  };
-
-  const onRemove = (id) => {
-    const nextNames = names.filter((name) => name.id !== id);
     setNames(nextNames);
+    setNextId(nextId + 1);
+    setInputText('');
   };
 
-  const namesList = names.map((name) => (
-    <li key={name.id} onDoubleClick={() => onRemove(name.id)}>
-      {name.text}
-    </li>
-  ));
+  // Delete list
+  const onRemove = (id) => {
+    const deleteValue = names.filter((item) => item.id !== id);
+    setNames(deleteValue);
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      onClick();
+    }
+  };
 
   return (
-    <>
-      <input value={inputText} onChange={onChange} />
+    <div>
+      <input value={inputText} onChange={onChange} onKeyPress={onKeyPress} />
       <button onClick={onClick}>추가</button>
-      <ul>{namesList}</ul>
-    </>
+      <ul>{namesList}</ul>;
+    </div>
   );
 };
 
