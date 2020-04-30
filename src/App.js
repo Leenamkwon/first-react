@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Average from './Average';
+import Info from './info';
 
 // 랜덤 색상을 생성합니다.
 // function getRandomColor() {
@@ -26,7 +26,7 @@ import Average from './Average';
 // }
 
 const App = () => {
-  return <Average />;
+  return <Info />;
 };
 
 export default App;

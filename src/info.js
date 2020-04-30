@@ -16,6 +16,7 @@ const Info = () => {
   const { name, nickName } = state;
 
   const onChange = (e) => {
+    console.log(e.target);
     dispatch(e.target);
   };
 
