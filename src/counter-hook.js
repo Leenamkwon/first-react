@@ -1,26 +1,37 @@
-import React, { useReducer } from 'react';
+import React, { useState } from 'react';
 
-function reducer(state, action) {
-  case 'INREMENT':
-    return { value: state.value + 1};
-  case 'DECREMENT';
-    return { value: state.value - 1};
-  default:
-      return state;
-}
+const getAverage = (numbers) => {
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
 
-const Counter = () => {
-  const [state, dispatch] = useReducer(reducer, { value = 0});
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
 
-  return (
-    <div>
-      <p>
-  현재 카운터 값은 <b>{state.value}</b>입니다.
-      </p>
-      <button onClick={() => dispatch({ type: 'INCREMENT'})}>+1</button>
-      <button onClick={() => dispatch({ type: 'DECREMENT'})}>-1</button>
-    </div>
-  )
-}
+  const onChange = (e) => {
+    setNumber(e.target.value);
+  };
 
-export default Counter;
+  const onInsert = (e) => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+
+    return (
+      <div>
+        <input value={number} onChange={onChange}></input>
+        <button onClick={onInsert}>등록</button>
+        <ul>
+          {list.map((value, index) => (
+            <li key={index}>{value}</li>
+          ))}
+        </ul>
+        <div>
+          <b>평균값: </b> {getAverage(list)}
+        </div>
+      </div>
+    );
+  };
+};
