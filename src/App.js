@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import Average from './Average';
+import React, { Component } from 'react';
+import SassComponent from './SassComponent';
 
-const App = () => {
-  return <Average />;
-};
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <SassComponent />
+      </div>
+    );
+  }
+}
 
 export default App;
